@@ -21,3 +21,14 @@ body {
 .text-primary {
   @apply text-[#018180]
 }
+
+.swiper-pagination-bullet {
+  margin: 0 6px !important; 
+  background-color: #018180 !important;
+  opacity: 50; 
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #018180 !important;
+  scale: 1.8;
+}
