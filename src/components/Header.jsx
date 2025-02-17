@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Logo from '../assets/main-logo.png'
 
 const Header = () => {
@@ -8,16 +8,37 @@ const Header = () => {
         setIsHamburgerActive(!isHamburgerActive);
     };
 
-    return (
-        <header>
-            <div className='container lg:pt-4 pt-3 font-Roboto'>
-                <div className='container flex items-center justify-between bg-white py-2 rounded-full'>
-                    <div className='w-40'>
-                        <img className='' src={Logo} alt="Logo" />
-                    </div>
-                    <i onClick={toggleHamburgerMenu} class="ri-menu-4-line text-3xl lg:hidden"></i>
+    useEffect(() => {
+        if (isHamburgerActive) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
 
-                    <div className='hidden lg:block text-lg'>
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [isHamburgerActive]);
+
+
+    return (
+        <header className=''>
+            <div className='container lg:pt-4 pt-3 font-Roboto'>
+                <div className='container flex items-center justify-between bg-[#fafafa] py-2 rounded-full'>
+                    <div className='w-40'>
+                        <a href="/"><img className='' src={Logo} alt="Logo" /></a>
+                    </div>
+                    <div className='flex gap-4 items-center pr-2'>
+                        <div className='hidden lg:block xl:hidden group'>
+                            <div className='btn-bg-primary text-white font-medium py-1 px-1 pl-2 rounded-full flex gap-1 items-center cursor-pointer group-hover:bg-white duration-300 transition-all group-hover:text-[#018180] border border-[#018180]'>
+                                <span>Get In Touch</span>
+                                <i className="ri-arrow-right-up-long-line py-1 px-2 bg-white text-[#018180] rounded-full text-lg group-hover:bg-[#018180] duration-300 transition-all group-hover:text-white group-hover:rotate-45"></i>
+                            </div>
+                        </div>
+                        <i onClick={toggleHamburgerMenu} class="ri-menu-4-line text-3xl xl:hidden cursor-pointer"></i>
+                    </div>
+
+                    <div className='hidden xl:block text-lg'>
                         <div>
                             <ul className='flex gap-6 font-Roboto'>
                                 <li className='hover:text-[#018180] duration-300 transition-all cursor-pointer'>
@@ -42,7 +63,7 @@ const Header = () => {
                         </div>
                     </div>
 
-                    <div className='hidden lg:block group'>
+                    <div className='hidden xl:block group'>
                         <div className='btn-bg-primary text-white font-medium py-1 px-1 pl-2 rounded-full flex gap-1 items-center cursor-pointer group-hover:bg-white duration-300 transition-all group-hover:text-[#018180] border border-[#018180]'>
                             <span>Get In Touch</span>
                             <i className="ri-arrow-right-up-long-line py-1 px-2 bg-white text-[#018180] rounded-full text-lg group-hover:bg-[#018180] duration-300 transition-all group-hover:text-white group-hover:rotate-45"></i>
@@ -52,8 +73,8 @@ const Header = () => {
                 </div>
             </div>
 
-            <div className={`bg-black min-h-[100vh] overflow-y-hidden z-50 w-full absolute top-0 bg-opacity-40 ${isHamburgerActive ? 'left-0' : '-left-[100%]'
-                } transition-all duration-500 ${!isHamburgerActive ? "delay-500" : "delay-0"} lg:hidden`}>
+            <div className={`bg-black h-screen z-50 w-full absolute top-0 bg-opacity-40 ${isHamburgerActive ? 'left-0' : '-left-[100%]'
+                } transition-all duration-500 ${!isHamburgerActive ? "delay-500" : "delay-0"} xl:hidden`}>
                 <div className={`absolute bg-[#fafafa] w-[75%] h-full ${isHamburgerActive ? 'left-0' : '-left-[100%]'
                     } transition-all duration-500 ${isHamburgerActive ? "delay-500" : "delay-0"}`}>
                     <div className='relative flex flex-col gap-12 container py-8'>
